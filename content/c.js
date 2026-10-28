@@ -324,11 +324,6 @@
   function um(e) {
     let t = Math.min(100, Math.max(0, Math.round(e)));
     localStorage.setItem(cm, String(t));
-    let n = document.querySelector("select.js-theme-select");
-    if (n && !zt(n.value)) {
-      to();
-      return;
-    }
     Ht();
   }
   function QL(e) {
@@ -446,9 +441,7 @@ body::before {
     "palette_firewatch",
     "palette_red_moon",
   ]);
-  function zt(e) {
-    return !!e && ZL.has(e);
-  }
+  function zt(e) { return true; }
   function to() {
     document
       .querySelectorAll(`style.LB-custom-bg, style.${tr}, style.${Hi}`)
@@ -547,7 +540,7 @@ body::before {
     let e = localStorage.getItem("LBThemeCSS");
     (e && qt(tE(e)), Cs(qt));
     let t = localStorage.getItem("LBThemeName");
-    (t !== null && !zt(t)) || Ht();
+    Ht();
   }
   var hm = nE;
   function oE(e, t = !1) {
@@ -8081,7 +8074,7 @@ html:root:has(style.theme) {
         Di(n),
         al(!0));
     let { user: r, loaded: s } = qe();
-    (s && !H(r, "custom_theme_background")) || !zt(e) ? to() : Ht();
+    Ht();
   }
   async function uC(e) {
     let t = e.target;
@@ -26203,16 +26196,7 @@ html:root:has(style.theme) {
         once: !0,
       }));
   }
-  async function xw(e) {
-    let t;
-    try {
-      let n = await chrome.storage.local.get("theme");
-      t = typeof n.theme == "string" ? n.theme : void 0;
-    } catch {
-      t = void 0;
-    }
-    H(e, "custom_theme_background") && zt(t) ? Ht() : to();
-  }
+  async function xw(e) { Ht(); }
   async function a0() {
     wu();
     let e = Se();

@@ -266,9 +266,7 @@ body::before {
     "palette_firewatch",
     "palette_red_moon",
   ]);
-  function P(t) {
-    return !!t && j.has(t);
-  }
+  function P(t) { return true; }
   function Q() {
     document
       .querySelectorAll(`style.LB-custom-bg, style.${i}, style.${d}`)
@@ -295,7 +293,7 @@ body::before {
     let t = localStorage.getItem("LBThemeCSS");
     (t && s(Z(t)), w(s));
     let e = localStorage.getItem("LBThemeName");
-    (e !== null && !P(e)) || p();
+    p();
   }
   var f = tt;
   document.location.host !== "support.funpay.com" && et();
