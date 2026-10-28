@@ -1,0 +1,18 @@
+# Dependencies and build
+node_modules/
+*.crx
+*.zip
+*.pem
+
+# Temporary files and logs
+*.tmp
+*.log
+test.txt
+test_crlf.tmp
+test_write.tmp
+
+# OS & IDE
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

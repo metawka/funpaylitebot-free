@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "author": "metawka",
+  "description": "__MSG_extDescription__",
+  "version": "2.3.7",
+  "default_locale": "ru",
+  "icons": {
+    "128": "assets/logo.png"
+  },
+  "action": {
+    "default_icon": "assets/logo.png"
+  },
+  "options_page": "content/static/litebotpage/redirect.html",
+  "homepage_url": "https://github.com/metawka/funpaylitebot-free",
+  "background": {
+    "service_worker": "background/b.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://funpay.com/*",
+        "https://*.funpay.com/*"
+      ],
+      "css": [
+        "content/static/style.css"
+      ],
+      "js": [
+        "content/t.js",
+        "content/c.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": [
+    "https://funpay.com/*",
+    "https://*.funpay.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://translate.googleapis.com/*",
+    "https://sfunpay.com/*"
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "offscreen",
+    "alarms",
+    "identity"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*",
+        "style/*",
+        "content/*",
+        "popup/*"
+      ],
+      "matches": [
+        "https://funpay.com/*",
+        "https://*.funpay.com/*"
+      ],
+      "extension_ids": []
+    }
+  ],
+  "content_security_policy": {
+    "script-src": "self",
+    "object-src": "self"
+  }
+}

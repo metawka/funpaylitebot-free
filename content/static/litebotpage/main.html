@@ -1,0 +1,2252 @@
+<style>
+  .button-container {
+    width: 180px;
+    margin-right: 14px;
+    margin-top: 10px;
+  }
+
+  .buttons {
+    
+    margin-left: 0;
+  }
+
+  .lb-settings-block {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .lb-input {
+    margin-bottom: 0.2em;
+    padding-left: 0;
+    display: flex !important;
+    align-items: initial;
+  }
+
+  .LB-update-banner {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    border: 1px solid var(--lb-surface-border, #d1d5db);
+    border-left: 3px solid #d08700;
+    border-radius: 8px;
+    background: var(--lb-surface, #fff);
+    color: var(--lb-surface-text, #1f2937);
+  }
+  .LB-update-banner[hidden] {
+    display: none;
+  }
+
+  .LB-update-banner-icon {
+    flex: none;
+    font-size: 24px;
+    line-height: 1;
+    color: #d08700;
+  }
+
+  .LB-update-banner-text {
+    min-width: 0;
+  }
+
+  .LB-update-banner-title {
+    margin: 0 0 4px;
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  .LB-update-banner-body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--lb-surface-muted, #6a7280);
+  }
+
+  .LB-update-banner-steps {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--lb-surface-muted, #6a7280);
+  }
+  .LB-update-banner-steps li {
+    margin: 2px 0;
+    font-size: 14px;
+  }
+  .LB-update-banner-link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .LB-changelog-list {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+  }
+
+  .LB-changelog-release {
+    padding: 0 0 16px;
+    margin: 0 0 16px;
+    border-bottom: 1px solid var(--lb-surface-border, #e5e7eb);
+  }
+  .LB-changelog-release:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .LB-changelog-release-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .LB-changelog-version {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .LB-changelog-installed {
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    border: 1px solid var(--lb-surface-border, #d1d5db);
+    color: var(--lb-surface-muted, #6a7280);
+    white-space: nowrap;
+  }
+
+  .LB-changelog-date {
+    font-size: 12px;
+    color: var(--lb-surface-muted, #6a7280);
+    margin-left: auto;
+  }
+
+  .LB-changelog-items {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+  }
+  .LB-changelog-items li {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 5px 0;
+    
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .LB-changelog-tag {
+    flex: none;
+    width: 82px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 0;
+    border-radius: 4px;
+    border: 1px solid currentColor;
+    opacity: 0.85;
+  }
+  .LB-changelog-tag[data-type="added"] {
+    color: #2f8f4e;
+  }
+  .LB-changelog-tag[data-type="improved"] {
+    color: #1f6feb;
+  }
+  .LB-changelog-tag[data-type="fixed"] {
+    color: #d08700;
+  }
+  .LB-changelog-tag[data-type="removed"] {
+    color: #a1a1aa;
+  }
+
+  @media (max-width: 520px) {
+    .LB-changelog-items li {
+      display: block;
+    }
+    .LB-changelog-tag {
+      display: inline-block;
+      width: auto;
+      padding: 2px 6px;
+      margin: 0 6px 3px 0;
+    }
+    .LB-changelog-date {
+      margin-left: 0;
+    }
+  }
+
+  .lb-input--nested,
+  .lb-input-desc--nested {
+    margin-left: 22px;
+  }
+
+  .lb-input.checkbox {
+    align-items: center;
+  }
+
+  .lb-field-label {
+    margin: 0 0 8px;
+    padding-left: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--lb-surface-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .lb-notify-row {
+    display: flex !important;
+    align-items: stretch;
+    gap: 10px;
+    max-width: 380px;
+  }
+  .lb-notify-row .LB-select {
+    flex: 1 1 auto;
+    height: 40px;
+    padding: 0 36px 0 14px;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--lb-surface-text, #1f2937);
+    background-color: var(--lb-surface, #fff);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%236a7280' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    border: 1px solid var(--lb-surface-border, #d1d5db);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .lb-notify-row .LB-select:hover {
+    border-color: #0b76ef;
+  }
+  .lb-notify-row .LB-select:focus {
+    outline: none;
+    border-color: #0b76ef;
+    box-shadow: 0 0 0 3px rgba(11, 118, 239, 0.18);
+  }
+  .LB-notify-preview {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    background: #0b76ef;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1 !important;
+    box-shadow: 0 1px 2px rgba(11, 118, 239, 0.25);
+    transition:
+      background-color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.1s ease;
+  }
+  .LB-notify-preview:hover {
+    background: #0a66cc;
+    box-shadow: 0 2px 6px rgba(11, 118, 239, 0.35);
+  }
+  .LB-notify-preview:active {
+    transform: scale(0.96);
+  }
+  .LB-notify-preview:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(11, 118, 239, 0.35);
+  }
+  .LB-notify-preview.is-playing {
+    background: #ef4444;
+    box-shadow: 0 1px 2px rgba(239, 68, 68, 0.3);
+  }
+  .LB-notify-preview.is-playing:hover {
+    background: #dc2626;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+  }
+  .LB-notify-preview-icon {
+    display: inline-flex;
+    width: 14px;
+    height: 14px;
+  }
+  .LB-notify-preview-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: currentColor;
+  }
+  .LB-notify-preview .LB-notify-preview-icon-stop {
+    display: none;
+  }
+
+  .lb-section-divider {
+    margin: 18px 0 16px;
+    border: 0;
+    border-top: 1px solid var(--lb-surface-border, rgba(0, 0, 0, 0.08));
+  }
+
+  .LB-feature-pill {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #fff;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    
+    align-self: center;
+  }
+  .LB-feature-pill[data-tier="community"] {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  }
+  
+  .LB-feature-pill[data-tier="pro"] {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  }
+  
+  .LB-feature-pill[data-tier="premium"] {
+    background: linear-gradient(135deg, #ef4444 0%, #9333ea 100%);
+  }
+  .LB-feature-pill {
+    cursor: pointer;
+    transition:
+      filter 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+  .LB-feature-pill:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 3px 8px rgba(79, 70, 229, 0.35);
+  }
+  
+  .LB-feature-pill[data-tier="pro"]:hover {
+    box-shadow: 0 3px 8px rgba(245, 158, 11, 0.35);
+  }
+  .LB-feature-pill[data-tier="premium"]:hover {
+    box-shadow: 0 3px 8px rgba(147, 51, 234, 0.35);
+  }
+
+  .LB-settings-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #fff !important;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    cursor: pointer;
+    background: linear-gradient(135deg, #0b76ef 0%, #1d4ed8 100%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition:
+      filter 0.12s ease,
+      box-shadow 0.12s ease,
+      transform 0.05s ease;
+    
+    align-self: center;
+  }
+  .LB-settings-badge:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 3px 8px rgba(11, 118, 239, 0.35);
+  }
+  .LB-settings-badge:active {
+    transform: translateY(1px);
+  }
+  
+  @media (pointer: coarse) {
+    .LB-settings-badge,
+    .LB-feature-pill {
+      padding: 8px 12px;
+    }
+  }
+  .LB-notify-preview.is-playing .LB-notify-preview-icon-play {
+    display: none;
+  }
+  .LB-notify-preview.is-playing .LB-notify-preview-icon-stop {
+    display: inline-flex;
+  }
+
+  .lb-bg-dim-row {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0 10px;
+    padding-left: 0;
+    font-size: 12px;
+    color: var(--lb-surface-muted);
+  }
+  .lb-bg-dim-row--visible {
+    display: flex;
+  }
+  .lb-bg-dim-row label {
+    margin: 0;
+    white-space: nowrap;
+  }
+  .lb-bg-dim-row input[type="range"] {
+    flex: 1;
+    max-width: 200px;
+    height: 4px;
+    margin: 0;
+    padding: 0;
+    background: var(--lb-surface-border, rgba(255, 255, 255, 0.18));
+    border-radius: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .lb-bg-dim-row input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--lb-accent, #b388eb);
+    cursor: pointer;
+    border: none;
+  }
+  .lb-bg-dim-row input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--lb-accent, #b388eb);
+    cursor: pointer;
+    border: none;
+  }
+  .lb-bg-dim-row .lb-bg-dim-value {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    min-width: 2.5em;
+    text-align: right;
+    opacity: 0.8;
+  }
+
+  .lb-input-desc--field {
+    padding-left: 0 !important;
+    margin: -4px 0 10px !important;
+  }
+  .lb-input-desc {
+    margin: 2px 0 14px;
+    padding-left: 31px;
+    
+    color: var(--lb-surface-muted, #6a7280);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .lb-hidden-paywalls {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: -8px 0 14px;
+    padding-left: 31px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--lb-surface-muted, #6a7280);
+  }
+  .lb-hidden-paywalls button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .lb-hidden-paywalls button:hover {
+    text-decoration: none;
+  }
+
+  .lb-input label {
+    padding-left: 0px !important;
+    font-size: 18px;
+  }
+
+  .lb-input select {
+    font-size: 16px;
+  }
+
+  .btn-save {
+    margin-top: 10px;
+  }
+
+  .notification {
+    position: fixed;
+    z-index: 5000;
+    font-size: 1.1em;
+    padding: 0.8em 1em !important;
+    margin: 0;
+    white-space: pre-line;
+    right: 64.5px;
+    top: 20px;
+    width: 350px;
+  }
+
+  .anim-out {
+    animation: hideBlock 1s linear backwards;
+    animation-delay: 1s;
+    opacity: 0;
+  }
+
+  @keyframes hideBlock {
+    0% {
+      display: block;
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .theme-select {
+    display: block;
+    cursor: pointer;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    background-image: none;
+    border: 1px solid;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition:
+      border-color ease-in-out 0.15s,
+      box-shadow ease-in-out 0.15s;
+    -o-transition:
+      border-color ease-in-out 0.15s,
+      box-shadow ease-in-out 0.15s;
+    transition:
+      border-color ease-in-out 0.15s,
+      box-shadow ease-in-out 0.15s;
+  }
+
+  .theme-select option {
+    cursor: pointer;
+  }
+
+  /* Tooltip Styles */
+
+  [data-tooltip] {
+    position: relative;
+    z-index: 2;
+    cursor: help;
+  }
+
+  [data-tooltip]:before,
+  [data-tooltip]:after {
+    visibility: hidden;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  [data-tooltip]:before {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-bottom: 5px;
+    margin-left: -99px;
+    padding: 7px;
+    width: 220px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #000;
+    background-color: hsla(0, 0%, 20%, 0.9);
+    color: #fff;
+    content: attr(data-tooltip);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  [data-tooltip]:after {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid #000;
+    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+  }
+
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after {
+    visibility: visible;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+  }
+
+  .question-img {
+    width: 18px;
+    margin-left: 5px;
+    vertical-align: initial;
+  }
+
+  .setting-img {
+    width: 18px;
+    margin-left: 5px;
+    vertical-align: initial;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  .modal {
+    top: 15%;
+  }
+
+  .review-modal {
+    position: fixed;
+    font-size: 16px;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    padding: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-image: initial;
+    border-radius: 8px;
+  }
+
+  .function-modal-overlay {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .function-modal {
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    max-width: 95vw;
+    min-width: 320px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 0 0 0 0;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.2s;
+  }
+
+  @media (max-width: 800px) {
+    .function-modal {
+      width: 98vw;
+      min-width: 0;
+    }
+  }
+
+  .function-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px 18px 24px;
+  }
+
+  .function-modal-title {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  .function-modal-close {
+    background: none;
+    border: none;
+    font-size: 2em;
+    line-height: 1;
+    cursor: pointer;
+    color: #888;
+  }
+  .function-modal-close:hover {
+    color: #e74c3c;
+  }
+
+  .function-modal-desc {
+    padding: 12px 24px 10px 24px;
+    color: #444;
+    font-size: 1em;
+  }
+
+  .function-modal-table-container {
+    padding: 0 24px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+  }
+
+  .function-modal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+  }
+
+  .function-modal-table thead {
+    font-size: 16px;
+  }
+
+  .function-modal-textarea {
+    min-width: 200px;
+  }
+
+  .function-modal-table th,
+  .function-modal-table td {
+    border: none;
+    padding: 8px 6px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .function-modal-table th {
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  .modal-checkbox {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 10px !important;
+    -webkit-appearance: auto !important;
+  }
+
+  .function-modal-select {
+    width: 80px;
+    font-size: 1em;
+    padding: 2px 4px;
+  }
+
+  .function-modal-delete {
+    margin-top: 4px;
+    background: none;
+    border: none;
+    font-size: 1.4em;
+    line-height: 1;
+    color: #888;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .function-modal-delete:hover {
+    color: #e74c3c;
+  }
+
+  .function-modal {
+    overscroll-behavior: contain;
+  }
+
+  @media (pointer: coarse) {
+    .function-modal-delete {
+      position: relative;
+    }
+    .function-modal-delete::after {
+      content: "";
+      position: absolute;
+      inset: -10px;
+    }
+  }
+
+  @media (max-width: 599px) {
+    #function-settings-modal .function-modal-table,
+    #function-settings-modal .function-modal-table tbody {
+      display: block;
+    }
+    #function-settings-modal .function-modal-table thead {
+      display: none;
+    }
+    #function-settings-modal .function-modal-table tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+    }
+    #function-settings-modal .function-modal-table td {
+      display: block;
+      padding: 0;
+      text-align: left;
+    }
+    #function-settings-modal .function-modal-table td:nth-child(1) {
+      grid-area: 1 / 1 / 2 / 3;
+    }
+    #function-settings-modal .function-modal-table td:nth-child(6) {
+      grid-area: 1 / 3;
+      text-align: center;
+    }
+    #function-settings-modal .function-modal-table td:nth-child(2) {
+      grid-area: 2 / 1 / 3 / 4;
+    }
+    #function-settings-modal .function-modal-table td:nth-child(3) {
+      grid-area: 3 / 1 / 4 / 4;
+    }
+    #function-settings-modal .function-modal-table td:nth-child(4) {
+      grid-area: 4 / 1;
+    }
+    #function-settings-modal .function-modal-table td:nth-child(5) {
+      grid-area: 4 / 2 / 5 / 4;
+    }
+    #function-settings-modal .function-modal-table td[data-label] {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    #function-settings-modal .function-modal-table td[data-label]::after {
+      content: attr(data-label);
+    }
+    #function-settings-modal .function-modal-table td .modal-checkbox {
+      flex: none;
+      margin: 0 !important;
+    }
+    
+    #function-settings-modal .function-modal-textarea {
+      min-width: 0;
+      width: 100%;
+      min-height: 64px;
+    }
+  }
+
+  .LB-settings-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  .LB-settings-nav {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: sticky;
+    top: 16px;
+  }
+
+  .LB-settings-nav-btn {
+    text-align: left;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    color: inherit;
+    line-height: 1.2;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .LB-settings-nav-btn:hover {
+    background: color-mix(in srgb, var(--lb-accent, #0b76ef) 8%, transparent);
+  }
+
+  .LB-settings-nav-btn.is-active {
+    background: color-mix(in srgb, var(--lb-accent, #0b76ef) 14%, transparent);
+    color: var(--lb-accent, #0b76ef);
+    font-weight: 600;
+  }
+
+  .LB-settings-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .LB-settings-panel {
+    display: none;
+  }
+
+  .LB-settings-panel.is-active {
+    display: block;
+  }
+
+  /* Account section */
+  .LB-account-host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 560px;
+  }
+
+  .LB-account-card {
+    border: 1px solid var(--lb-surface-border, rgba(0, 0, 0, 0.08));
+    border-radius: 8px;
+    padding: 16px 18px;
+    background: var(--lb-row-bg, rgba(11, 118, 239, 0.04));
+    color: var(--lb-surface-text, inherit);
+    cursor: pointer;
+    transition:
+      filter 0.12s ease,
+      box-shadow 0.12s ease,
+      transform 0.05s ease;
+  }
+  .LB-account-card:hover {
+    filter: brightness(1.04);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+  .LB-account-card:active {
+    transform: translateY(1px);
+  }
+  .LB-account-card:focus-visible {
+    outline: 2px solid rgba(11, 118, 239, 0.45);
+    outline-offset: 2px;
+  }
+
+  .LB-account-card[data-tier="basic"] {
+    border-color: rgba(107, 114, 128, 0.55);
+    background: linear-gradient(
+      135deg,
+      rgba(107, 114, 128, 0.1),
+      rgba(156, 163, 175, 0.1)
+    );
+  }
+  .LB-account-card[data-tier="community"] {
+    border-color: rgba(79, 70, 229, 0.55);
+    background: linear-gradient(
+      135deg,
+      rgba(79, 70, 229, 0.1),
+      rgba(124, 58, 237, 0.1)
+    );
+  }
+  
+  .LB-account-card[data-tier="pro"] {
+    border-color: rgba(245, 158, 11, 0.55);
+    background: linear-gradient(
+      135deg,
+      rgba(245, 158, 11, 0.1),
+      rgba(239, 68, 68, 0.1)
+    );
+  }
+  
+  .LB-account-card[data-tier="premium"] {
+    border-color: rgba(147, 51, 234, 0.55);
+    background: linear-gradient(
+      135deg,
+      rgba(239, 68, 68, 0.1),
+      rgba(147, 51, 234, 0.1)
+    );
+  }
+
+  .LB-account-card-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--lb-surface-muted, #6a7280);
+    margin-bottom: 6px;
+  }
+
+  .LB-account-card-plan {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .LB-account-card-meta {
+    margin-top: 6px;
+    color: var(--lb-surface-muted, #6a7280);
+    font-size: 14px;
+  }
+
+  .LB-account-empty {
+    padding: 18px 20px;
+    border: 1px dashed var(--lb-surface-border, rgba(0, 0, 0, 0.12));
+    border-radius: 8px;
+    background: var(--lb-row-bg, transparent);
+    color: var(--lb-surface-text, #4b5563);
+  }
+
+  .LB-account-empty .btn {
+    margin-top: 12px;
+  }
+
+  .LB-info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 560px;
+  }
+
+  .LB-info-row-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--lb-surface-muted, #6a7280);
+  }
+
+  .LB-info-row-value {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .lb-info-version-value {
+    margin: 0 0 8px;
+    padding-left: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--lb-surface-text, inherit);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .LB-golden-key-panel {
+    border: 1px solid var(--lb-surface-border, rgba(0, 0, 0, 0.08));
+    border-radius: 8px;
+    padding: 16px 18px;
+    
+    background: var(--lb-row-bg, rgba(11, 118, 239, 0.04));
+    color: var(--lb-surface-text, inherit);
+    max-width: 560px;
+  }
+
+  .LB-golden-key-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .LB-golden-key-desc {
+    margin: 0 0 12px;
+    color: var(--lb-surface-muted, #6a7280);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .LB-golden-key-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .LB-golden-key-input {
+    flex: 1 1 240px;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--lb-surface-border, #d1d5db);
+    border-radius: 4px;
+    background: var(--lb-surface, #fff);
+    color: var(--lb-surface-text, #333);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+
+  .LB-golden-key-input::placeholder {
+    font-family: inherit;
+    color: var(--lb-surface-muted, #9ca3af);
+    font-style: italic;
+  }
+
+  .LB-golden-key-btn {
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+  }
+
+  .LB-golden-key-btn[disabled],
+  .LB-golden-key-revoke[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .LB-golden-key-revoke {
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    color: #b91c1c !important;
+    border-color: rgba(185, 28, 28, 0.3) !important;
+  }
+
+  .LB-golden-key-revoke:hover:not([disabled]) {
+    background: rgba(185, 28, 28, 0.08) !important;
+  }
+
+  .LB-delete-account-btn {
+    color: #b91c1c !important;
+    border-color: rgba(185, 28, 28, 0.3) !important;
+  }
+
+  .LB-delete-account-btn:hover:not([disabled]) {
+    background: rgba(185, 28, 28, 0.08) !important;
+  }
+
+  .LB-delete-account-btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .LB-golden-key-confirm-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 760px) {
+    .LB-settings-layout {
+      flex-direction: column;
+      gap: 12px;
+      
+      align-items: stretch;
+    }
+    
+    .LB-settings-nav {
+      width: auto;
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+      padding-bottom: 4px;
+    }
+    .LB-settings-nav-btn {
+      flex: none;
+      padding: 12px 10px;
+      font-size: 14px;
+      
+      background: rgba(128, 128, 128, 0.1);
+    }
+    .LB-settings-nav-btn.is-active {
+      background: color-mix(
+        in srgb,
+        var(--lb-accent, #0b76ef) 16%,
+        transparent
+      );
+    }
+
+    .notification {
+      right: 12px;
+      left: 12px;
+      top: 12px;
+      
+      width: auto;
+    }
+    .review-modal {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      width: auto;
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+    .review-modal p {
+      margin: 0 0 10px;
+    }
+
+    .buttons {
+      margin-left: 0;
+    }
+    .button-container {
+      width: 100%;
+      margin-right: 0;
+    }
+    .button-container .btn {
+      width: 100%;
+    }
+
+    .lb-input {
+      padding-left: 0;
+      
+      flex-wrap: wrap;
+      row-gap: 6px;
+    }
+    .lb-input-desc {
+      padding-left: 1.7em;
+    }
+    .lb-field-label {
+      padding-left: 0;
+    }
+
+    .LB-golden-key-input {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+<div class="LB-update-banner" id="LB-update-banner" role="status" hidden>
+  <span class="LB-update-banner-icon" aria-hidden="true">⬆</span>
+  <div class="LB-update-banner-text">
+    <p class="LB-update-banner-title">{updateBannerTitle}</p>
+    <p class="LB-update-banner-body" id="LB-update-banner-body"></p>
+    <ol class="LB-update-banner-steps" id="LB-update-banner-steps"></ol>
+  </div>
+</div>
+
+<div class="alert alert-info flb-free-banner" role="alert">
+  <div class="flb-free-banner-header">
+    <div class="flb-free-banner-title">FunPay Lite Bot FREE</div>
+    <div class="flb-free-banner-author">
+      by <a href="https://t.me/metawka" target="_blank" rel="noopener"><strong>metawka</strong></a> &bull;
+      <a href="https://github.com/metawka/funpaylitebot-free" target="_blank" rel="noopener" class="alert-link">github.com/metawka/funpaylitebot-free</a>
+    </div>
+  </div>
+  <div class="flb-free-banner-content">
+    <p>Модифицированная версия расширения с открытой PREMIUM версией и её полным рабочим функционалом.</p>
+    <p>Расширение не поддерживает: описания, кастомные цвета ника, продление/оплату подписки, привязку аккаунтов.</p>
+    <p>Проект не несёт цели нанести материальный ущерб команде FunPay Community, а лишь хочет помочь продавцам получать крутой функционал, не тратя при этом часть своего заработка на таковой.</p>
+  </div>
+</div>
+
+<div class="LB-settings-layout">
+  <aside
+    class="LB-settings-nav"
+    role="tablist"
+    aria-label="Settings categories"
+  >
+    <button
+      type="button"
+      class="LB-settings-nav-btn is-active"
+      role="tab"
+      data-section="account"
+    >
+      👤 {settingsCategoryAccount}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="theme"
+    >
+      ⭐️ {settingTheme}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="customization"
+    >
+      🎨 {settingsCategoryCustomization}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="offers"
+    >
+      📒 {settingOffers}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="messages"
+    >
+      💬 {messages}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="notifications"
+    >
+      🔔 {settingsCategoryNotifications}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="purchases"
+    >
+      🛒 {purchases}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="sales"
+    >
+      💲 {sales}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="finances"
+    >
+      💰 {finances}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="reviews"
+    >
+      ⭐ {settingsCategoryReviews}
+    </button>
+
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="api"
+    >
+      🔑 {settingsCategoryApi}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="changelog"
+    >
+      🆕 {settingsCategoryChangelog}
+    </button>
+    <button
+      type="button"
+      class="LB-settings-nav-btn"
+      role="tab"
+      data-section="info"
+    >
+      ℹ️ {settingsCategoryInfo}
+    </button>
+  </aside>
+
+  <section class="LB-settings-content">
+    <div
+      class="LB-settings-panel is-active"
+      data-section="account"
+      role="tabpanel"
+    >
+      <div class="LB-account-host"></div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="theme" role="tabpanel">
+      <p class="lb-field-label">{settingThemeChoice}</p>
+      <div class="lb-input checkbox">
+        <select class="theme-select js-theme-select">
+          <option value="light">{settingThemeLight}</option>
+          <option value="dark">{settingThemeDark}</option>
+          <option value="firewatch">{settingThemeFirewatch}</option>
+          <option value="red_moon">Red Moon</option>
+          
+          <option value="palette" hidden>palette</option>
+          <option value="palette_firewatch" hidden>palette_firewatch</option>
+          <option value="palette_red_moon" hidden>palette_red_moon</option>
+        </select>
+      </div>
+
+      <hr class="lb-section-divider" />
+
+      <p class="lb-field-label">
+        {settingThemeCustomBackground}
+        <span data-feature-pill="community"></span>
+      </p>
+      <p class="lb-input-desc lb-input-desc--field">
+        {settingThemeCustomBackgroundDesc}
+      </p>
+      <div class="lb-input">
+        <button type="button" class="btn btn-default" id="LB-theme-bg-pick">
+          {settingThemeChooseImage}
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="LB-theme-bg-clear"
+          style="display: none; margin-left: 6px"
+        >
+          {settingThemeRemoveImage}
+        </button>
+      </div>
+      
+      <p
+        class="lb-input-desc"
+        id="LB-theme-bg-status"
+        style="display: none"
+      ></p>
+      <p
+        class="lb-input-desc"
+        id="LB-theme-bg-filename"
+        style="
+          display: none;
+          padding-left: 0;
+          font-family: monospace;
+          font-size: 11px;
+          opacity: 0.7;
+        "
+      ></p>
+      <div class="lb-bg-dim-row" id="LB-theme-bg-dim-row">
+        <label for="LB-theme-bg-dim">{settingThemeCustomBackgroundDim}</label>
+        <input
+          type="range"
+          id="LB-theme-bg-dim"
+          min="0"
+          max="100"
+          step="1"
+          value="25"
+        />
+        <span id="LB-theme-bg-dim-value" class="lb-bg-dim-value">25%</span>
+      </div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="customization" role="tabpanel">
+      
+      <div class="LB-customization-host"></div>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="privacyMode"
+            id="privacyMode"
+          />
+          <span>{settingsPrivacyMode}</span>
+        </label>
+        <span data-feature-pill="community"></span>
+      </div>
+      <p class="lb-input-desc">{settingsPrivacyModeDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="hideLockedFeatures"
+            id="hideLockedFeatures"
+          />
+          <span>{settingsHideLockedFeatures}</span>
+        </label>
+        <span data-feature-pill="community"></span>
+      </div>
+      <p class="lb-input-desc">{settingsHideLockedFeaturesDesc}</p>
+
+      <div
+        class="lb-hidden-paywalls"
+        id="LB-hidden-paywalls"
+        style="display: none"
+      >
+        <span id="LB-hidden-paywalls-count"></span>
+        <button type="button" id="LB-hidden-paywalls-reset">
+          {settingsHiddenPaywallsReset}
+        </button>
+      </div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="offers" role="tabpanel">
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input type="checkbox" class="LB" name="autoUp" id="autoUp" />
+          <span>{settingOfferAutoRaise}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{settingOfferAutoRaiseDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="raiseNotifications"
+            id="raiseNotifications"
+          />
+          <span>{raiseNotifications}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{raiseNotificationsDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="viewSellersPromo"
+            id="viewSellersPromo"
+          />
+          <span>{settingViewSellersPromo}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{settingViewSellersPromoDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="customPrices"
+            id="customPrices"
+          />
+          <span>{settingExactPrice}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{settingExactPriceDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="lotManagementPanel"
+            id="lotManagementPanel"
+          />
+          <span>{lotManagementPanel}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{lotManagementPanelDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="enableLotTranslate"
+            id="enableLotTranslate"
+          />
+          <span>{enableLotTranslate}</span>
+        </label>
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{enableLotTranslateDesc}</p>
+
+      <div class="lb-input checkbox" style="padding-left: 31px">
+        <select
+          class="theme-select LB-select"
+          name="autoTranslateOnSave"
+          id="autoTranslateOnSave"
+        >
+          <option value="button">{autoTranslateModeButton}</option>
+          <option value="auto">{autoTranslateModeAuto}</option>
+        </select>
+      </div>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="showRealLotPrices"
+            id="showRealLotPrices"
+          />
+          <span>{showRealLotPrices}</span>
+        </label>
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{showRealLotPricesDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="bulkLotEdit"
+            id="bulkLotEdit"
+          />
+          <span>{bulkLotEdit}</span>
+        </label>
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{bulkLotEditDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="lotAiGenerate"
+            id="lotAiGenerate"
+          />
+          <span>{lotAiGenerate}</span>
+        </label>
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{lotAiGenerateDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="showSectionCommission"
+            id="showSectionCommission"
+          />
+          <span>{showSectionCommission}</span>
+        </label>
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{showSectionCommissionDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="lotCostPrice"
+            id="lotCostPrice"
+          />
+          <span>{lotCostPrice}</span>
+        </label>
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{lotCostPriceDesc}</p>
+
+      <div class="lb-input checkbox" style="padding-left: 31px">
+        <select
+          class="theme-select LB-select"
+          name="withdrawalCommission"
+          id="withdrawalCommission"
+        >
+          <option value="3">{costPriceWithdrawalCommission} 3%</option>
+          <option value="6">{costPriceWithdrawalCommission} 6%</option>
+        </select>
+      </div>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="lotTransfer"
+            id="lotTransfer"
+          />
+          <span>{lotTransfer}</span>
+        </label>
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{lotTransferDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input type="checkbox" class="LB" name="lotClone" id="lotClone" />
+          <span>{lotClone}</span>
+        </label>
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{lotCloneDesc}</p>
+    </div>
+
+    <div class="LB-settings-panel" data-section="messages" role="tabpanel">
+      
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input type="checkbox" class="LB" name="emojiPanel" id="emojiPanel" />
+          <span>{emojiPanel}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{emojiPanelDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="fastMessages"
+            id="fastMessages"
+          />
+          <span>{settingsFastMessages}</span>
+        </label>
+        <a class="pointer LB-settings-badge">{fastMessagesSettingsButton}</a>
+        <span data-feature-pill="community"></span>
+      </div>
+      <p class="lb-input-desc">{settingsFastMessagesDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="welcomeMessageEnabled"
+            id="welcomeMessageEnabled"
+          />
+          <span>{welcomeMessageTitle}</span>
+        </label>
+        <a class="pointer LB-settings-badge LB-welcome-settings-badge"
+          >{welcomeMessageSettings}</a
+        >
+        <span data-feature-pill="pro"></span>
+      </div>
+      <p class="lb-input-desc">{welcomeMessageDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="autoReplyEnabled"
+            id="autoReplyEnabled"
+          />
+          <span>{autoReplyTitle}</span>
+        </label>
+        <a class="pointer LB-settings-badge LB-autoreply-settings-badge"
+          >{autoReplySettings}</a
+        >
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{autoReplyDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="orderConfirmReplyEnabled"
+            id="orderConfirmReplyEnabled"
+          />
+          <span>{orderConfirmReplyTitle}</span>
+        </label>
+        <a class="pointer LB-settings-badge LB-orderconfirm-settings-badge"
+          >{orderConfirmReplySettings}</a
+        >
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{orderConfirmReplyDesc}</p>
+    </div>
+
+    <div class="LB-settings-panel" data-section="notifications" role="tabpanel">
+      
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="systemNotifications"
+            id="systemNotifications"
+          />
+          <span>{systemNotifications}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{systemNotificationsDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <p class="lb-field-label">{settingCustomNotification}</p>
+      <p class="lb-input-desc lb-input-desc--field">
+        {settingCustomNotificationDesc}
+      </p>
+      <div class="lb-input lb-notify-row">
+        <select
+          class="theme-select LB-select"
+          name="customNotify"
+          id="customNotify"
+        >
+          <option value="default">{customNotifyOptionDefault}</option>
+          <option value="vk">VK</option>
+          <option value="custom">{customNotifyOptionCustom}</option>
+          
+        </select>
+        <button
+          type="button"
+          class="LB-notify-preview"
+          id="LB-notify-preview"
+          title="{customNotifyPreviewTitle}"
+          aria-label="{customNotifyPreviewTitle}"
+        >
+          <span
+            class="LB-notify-preview-icon LB-notify-preview-icon-play"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 1.8v10.4c0 .7.8 1.1 1.4.7l8.2-5.2c.5-.3.5-1.1 0-1.4L4.4 1.1C3.8.7 3 1.1 3 1.8z"
+              />
+            </svg>
+          </span>
+          <span
+            class="LB-notify-preview-icon LB-notify-preview-icon-stop"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2.5" y="2.5" width="9" height="9" rx="1.5" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <div id="LB-notify-upload-row" style="display: none">
+        <p class="lb-field-label">{customNotifyOptionCustom}</p>
+        <div class="lb-input">
+          <button
+            type="button"
+            class="btn btn-default"
+            id="LB-notify-sound-pick"
+          >
+            {settingCustomNotifyChooseFile}
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            id="LB-notify-sound-clear"
+            style="display: none; margin-left: 6px"
+          >
+            {settingThemeRemoveImage}
+          </button>
+          <span data-feature-pill="pro"></span>
+        </div>
+        <p
+          class="lb-input-desc"
+          id="LB-notify-sound-status"
+          style="display: none; padding-left: 0"
+        ></p>
+        <p
+          class="lb-input-desc"
+          id="LB-notify-sound-filename"
+          style="
+            display: none;
+            padding-left: 0;
+            margin-top: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            opacity: 0.8;
+          "
+        ></p>
+      </div>
+
+      <hr class="lb-section-divider" />
+
+      <p class="lb-field-label">{settingOrderSound}</p>
+      <p class="lb-input-desc lb-input-desc--field">{settingOrderSoundDesc}</p>
+      <div class="lb-input lb-notify-row">
+        <select
+          class="theme-select LB-select"
+          name="orderSound"
+          id="orderSound"
+        >
+          <option value="off">{orderSoundOptionOff}</option>
+          <option value="iphone">iPhone</option>
+          <option value="custom">{customNotifyOptionCustom}</option>
+          
+        </select>
+        <button
+          type="button"
+          class="LB-notify-preview"
+          id="LB-order-sound-preview"
+          title="{customNotifyPreviewTitle}"
+          aria-label="{customNotifyPreviewTitle}"
+        >
+          <span
+            class="LB-notify-preview-icon LB-notify-preview-icon-play"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 1.8v10.4c0 .7.8 1.1 1.4.7l8.2-5.2c.5-.3.5-1.1 0-1.4L4.4 1.1C3.8.7 3 1.1 3 1.8z"
+              />
+            </svg>
+          </span>
+          <span
+            class="LB-notify-preview-icon LB-notify-preview-icon-stop"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2.5" y="2.5" width="9" height="9" rx="1.5" />
+            </svg>
+          </span>
+        </button>
+        <span data-feature-pill="pro"></span>
+      </div>
+
+      <div id="LB-order-sound-upload-row" style="display: none">
+        <p class="lb-field-label">{customNotifyOptionCustom}</p>
+        <div class="lb-input">
+          <button
+            type="button"
+            class="btn btn-default"
+            id="LB-order-sound-pick"
+          >
+            {settingCustomNotifyChooseFile}
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            id="LB-order-sound-clear"
+            style="display: none; margin-left: 6px"
+          >
+            {settingThemeRemoveImage}
+          </button>
+          <span data-feature-pill="pro"></span>
+        </div>
+        <p
+          class="lb-input-desc"
+          id="LB-order-sound-status"
+          style="display: none; padding-left: 0"
+        ></p>
+        <p
+          class="lb-input-desc"
+          id="LB-order-sound-filename"
+          style="
+            display: none;
+            padding-left: 0;
+            margin-top: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            opacity: 0.8;
+          "
+        ></p>
+      </div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="purchases" role="tabpanel">
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="showPurchasesStats"
+            id="showPurchasesStats"
+          />
+          <span>{showPurchasesStats}</span>
+        </label>
+        <span data-feature-pill="community"></span>
+      </div>
+      <p class="lb-input-desc">{showPurchasesStatsDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="exportPurchases"
+            id="exportPurchases"
+          />
+          <span
+            >{exportPurchasesEnable}<span data-feature-pill="pro"></span
+          ></span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{exportPurchasesEnableDesc}</p>
+    </div>
+
+    <div class="LB-settings-panel" data-section="sales" role="tabpanel">
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="showSalesStats"
+            id="showSalesStats"
+          />
+          <span>{showSalesStats}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{showSalesStatsDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="quickCopyOrderId"
+            id="quickCopyOrderId"
+          />
+          <span>{quickCopyOrderId}</span>
+        </label>
+        <span data-feature-pill="community"></span>
+      </div>
+      <p class="lb-input-desc">{quickCopyOrderIdDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="exportSales"
+            id="exportSales"
+          />
+          <span>{exportSalesEnable}<span data-feature-pill="pro"></span></span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{exportSalesEnableDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="showUnconfirmedSales"
+            id="showUnconfirmedSales"
+          />
+          <span
+            >{showUnconfirmedSales}<span data-feature-pill="pro"></span
+          ></span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{showUnconfirmedSalesDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="supportConfirmTickets"
+            id="supportConfirmTickets"
+          />
+          <span
+            >{supportConfirmTickets}<span data-feature-pill="pro"></span
+          ></span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{supportConfirmTicketsDesc}</p>
+    </div>
+
+    <div class="LB-settings-panel" data-section="finances" role="tabpanel">
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="withdrawalAvailability"
+            id="withdrawalAvailability"
+          />
+          <span>{withdrawalAvailability}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{withdrawalAvailabilityDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="showFinancesStats"
+            id="showFinancesStats"
+          />
+          <span>{showFinancesStats}</span>
+        </label>
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{showFinancesStatsDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="exportFinances"
+            id="exportFinances"
+          />
+          <span
+            >{exportFinancesEnable}<span data-feature-pill="premium"></span
+          ></span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{exportFinancesEnableDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="hideBalance"
+            id="hideBalance"
+          />
+          <span>{settingsHideBalance}</span>
+        </label>
+      </div>
+      <p class="lb-input-desc">{settingsHideBalanceDesc}</p>
+    </div>
+
+    <div class="LB-settings-panel" data-section="reviews" role="tabpanel">
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="reviewReplyEnabled"
+            id="reviewReplyEnabled"
+          />
+          <span>{reviewReplyTitle}</span>
+        </label>
+        <a class="pointer LB-settings-badge LB-review-settings-badge"
+          >{reviewReplySettings}</a
+        >
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{reviewReplyDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <div class="lb-input checkbox">
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            class="LB"
+            name="aiReviewReplyEnabled"
+            id="aiReviewReplyEnabled"
+          />
+          <span>{aiReviewReplyTitle}</span>
+        </label>
+        <a class="pointer LB-settings-badge LB-aireview-settings-badge"
+          >{aiReviewReplySettings}</a
+        >
+        <span data-feature-pill="premium"></span>
+      </div>
+      <p class="lb-input-desc">{aiReviewReplyDesc}</p>
+
+      <hr class="lb-section-divider" />
+
+      <p class="lb-input-desc lb-input-desc--field">
+        {reviewsRatingLimitsDesc}
+      </p>
+      <div class="buttons">
+        <div class="button-container">
+          <a href="https://funpay.com/sras/info" target="_blank" rel="noopener">
+            <button type="button" class="btn btn-default">
+              {reviewsRatingLimitsButton}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="api" role="tabpanel">
+      <div class="LB-api-host"></div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="changelog" role="tabpanel">
+      <p class="lb-field-label">{changelogHeading}</p>
+      <p class="lb-input-desc lb-input-desc--field">{changelogDesc}</p>
+      
+      <p
+        class="lb-input-desc lb-input-desc--field"
+        id="LB-changelog-status"
+        style="display: none"
+      ></p>
+      <div id="LB-changelog-host"></div>
+    </div>
+
+    <div class="LB-settings-panel" data-section="info" role="tabpanel">
+      <p class="lb-field-label">Связь с разработчиком</p>
+      <div class="buttons">
+        <div class="button-container" style="width: auto; min-width: 220px;">
+          <a href="https://t.me/metawka" target="_blank" rel="noopener">
+            <button type="button" class="btn btn-default">
+              Связаться с разработчиком
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <hr class="lb-section-divider" />
+
+      <p class="lb-field-label">{settingReset}</p>
+      <div class="buttons">
+        <div class="button-container">
+          <button type="button" class="btn btn-default js-settings-reset">
+            {settingsReset}
+          </button>
+        </div>
+      </div>
+
+      <hr class="lb-section-divider" />
+
+      <div class="LB-account-id-section" hidden>
+        <p class="lb-field-label">{accountIdLabel}</p>
+        <p class="lb-info-version-value" id="LB-account-id-value"></p>
+        <hr class="lb-section-divider" />
+      </div>
+
+      <p class="lb-field-label">{infoVersionLabel}</p>
+      <p class="lb-info-version-value" id="LB-info-version-value"></p>
+
+      <div class="LB-delete-account-section" hidden>
+        <hr class="lb-section-divider" />
+        <p class="lb-field-label">{deleteAccountLabel}</p>
+        <p
+          class="lb-input-desc lb-input-desc--field LB-delete-account-blocked"
+          id="LB-delete-account-blocked"
+          style="display: none"
+        >
+          {deleteAccountBlocked}
+        </p>
+        <div class="buttons">
+          <div class="button-container">
+            <button
+              type="button"
+              class="btn btn-default LB-delete-account-btn js-delete-account"
+            >
+              {deleteAccountButton}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="offer review-modal">
+  <p>{settingsReviewTitle}</p>
+  <div>
+    <a href="{storeReviewUrl}" target="_blank" class="btn btn-primary btn-block" style="display:flex;align-items:center;justify-content:center;gap:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> {settingsReviewButton}</a>
+  </div>
+</div>
